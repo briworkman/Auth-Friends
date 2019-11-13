@@ -1,23 +1,30 @@
 import React from "react";
+import Login from "./components/Login";
+import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Friends from "./components/Friends";
+import PrivateRoute from "./components/PrivateRoute";
+
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <nav className="nav">
+          <Link className="link" to="/login">
+            Login
+          </Link>
+          <Link className="link" to="/protected">
+            Friends
+          </Link>
+        </nav>
+        <Switch>
+          <PrivateRoute path="/protected" component={Friends} />
+          <Route path="/login" component={Login} />
+          <Route component={Login} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
